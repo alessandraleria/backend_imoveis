@@ -1,13 +1,15 @@
+const http = require("http");
 const express = require("express");
 const routes = require("./routes");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+require("dotenv-safe").config();
 
 require("./database");
 
 const app = express();
 
-app.use(express.json({limit: '150mb'}));
+app.use(bodyParser.json());
 app.use(express.urlencoded({limit: '50mb', extended: true}));
 
 app.use((req, res, next) => {

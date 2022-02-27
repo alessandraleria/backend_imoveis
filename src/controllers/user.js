@@ -1,10 +1,11 @@
 const User = require("../models/User");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
     async index(req, res){
         const users = await User.findAll({
-            attributes: ['cpf', 'name', 'email', 'phone', 'address']
+            attributes: ['name', 'email']
         });
 
         return res.json(users);
@@ -75,59 +76,6 @@ module.exports = {
             return res.status(400).json({
                 success: false,
                 message: "Falha no Cadastro!"
-            });
-        }
-    },
-
-    async auth(req, res){
-        const {email, password} = req.body;
-
-        try {
-            const count = await User.count({
-                where: {
-                    email: email
-                }
-            });
-
-            if(count <= 0){
-                return res.json({
-                    success: false,
-                    status: 0,
-                    message: "E-mail não encontrado! Cadastre-se ou cheque as credenciais de login e tente novamente."
-                });
-            } else {
-                var user = await User.findOne({
-                    attributes: ['password', 'id', 'access_level'],
-                    where: {
-                        email: email
-                    }
-                });
-
-                const passbd = user.getDataValue("password");
-                const match = await bcrypt.compare(password, passbd);
-
-                if (match){
-                    return res.status(200).json({
-                        success: true,
-                        status: 1,
-                        message: "Login realizado com Sucesso!",
-                        data: user,
-                        id: user.getDataValue('id')
-                    });
-                } else {
-                    return res.json({
-                        success: false,
-                        status: 2,
-                        message: "Senha incorreta!"
-                    });
-                }
-            }
-        } catch (error) {
-            console.log("Erro: " + error);
-
-            return res.status(400).json({
-                success: false,
-                message: "Credenciais inválidas!"
             });
         }
     },
