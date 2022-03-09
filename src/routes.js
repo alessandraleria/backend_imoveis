@@ -3,6 +3,7 @@ const express = require("express");
 const User = require("./controllers/user");
 const Product = require("./controllers/product");
 const Auth = require("./controllers/auth");
+const Properties = require("./controllers/properties");
 
 const routes = express.Router();
 
@@ -23,5 +24,9 @@ routes.post("/products/find", Product.findById);
 routes.post("/products/create", Product.create);
 routes.post("/products/edit", Product.edit);
 routes.post("/products/delete", Product.delete);
+
+routes.get("/properties", Properties.index);
+routes.post("/properties/findByUser", Properties.findByUserId);
+routes.post("/properties/findById", Properties.findById);
 
 module.exports = routes;
