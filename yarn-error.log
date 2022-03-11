@@ -23,14 +23,14 @@ Trace:
 
 npm manifest: 
   {
-    "name": "Padaria_API",
+    "name": "backend_imoveis",
     "version": "1.0.0",
     "main": "index.js",
     "scripts": {
       "dev": "nodemon src/app.js",
       "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "repository": "https://github.com/alessandraleria/Padaria_API.git",
+    "repository": "https://github.com/alessandraleria/backend_imoveis",
     "author": "Alessandra Leria <alessandraleria@hotmail.com>",
     "license": "MIT",
     "dependencies": {
