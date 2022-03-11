@@ -24,6 +24,6 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(routes);
+app.use('/', routes);
 
 app.listen(3030);
