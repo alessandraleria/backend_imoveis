@@ -34,6 +34,8 @@ module.exports = {
 
     async filter(req, res){
         const { id, search, property_type, max_value, min_value } = req.body;
+        console.log(min_value);
+        console.log(max_value);
         const filtered = await Properties.findAll({
             where: {
                 id_user: id,
@@ -55,6 +57,7 @@ module.exports = {
                 value: {[Op.between]: [min_value ? min_value : 0, max_value ? max_value : 99999999]}
             },
         });
+        console.log(filtered);
         return res.json(filtered);
     }
     

@@ -62,7 +62,7 @@ module.exports = {
                 const id = user.getDataValue("id");
                 if (match){
                     const token = jwt.sign({id}, process.env.SECRET, {
-                        expiresIn: 300
+                        expiresIn: "2d"
                     });
 
                     return res.status(200).json({
@@ -111,7 +111,7 @@ module.exports = {
 
             const payload = ticket.getPayload();
             const userId = payload['sub'];
-            
+
             const count = await User.count({
                 where: {
                     email: payload.email
@@ -204,16 +204,16 @@ module.exports = {
 
     async checkUser(req, res, next){
         var token = req.headers['authorization'];
-
         if (!token)
             return res.status(401).json({ auth: false, message: 'No token provided.' });
         if(typeof token !== 'undefined'){
             
             jwt.verify(token, process.env.SECRET, {algorithms: ['HS256']}, async (err, decoded) => {
                 if(typeof decoded !== 'undefined'){
+                    console.log(decoded);
                     var user = await User.findOne({
                         where: {
-                            id: 1
+                            id: decoded.userId ? decoded.userId : decoded.id 
                         }
                     }); 
                     res.status(200).send({ user }); 
