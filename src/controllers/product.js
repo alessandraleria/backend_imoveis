@@ -1,3 +1,4 @@
+const { findAll } = require("../models/Product");
 const Product = require("../models/Product");
 
 module.exports = {
@@ -15,7 +16,30 @@ module.exports = {
             where: {
                 code: code
             },
-            attributes: ['id','code', 'name', 'current_quantity', 'minimum_quantity', 'status']
+            attributes: ['id', 'code', 'name', 'current_quantity', 'minimum_quantity', 'status']
+        });
+        return res.json(product);
+    },
+
+    async findParam(req, res){
+        const { param } = req.body;
+        const product = await Product.findAll({
+            where: {
+                name: {[Sequelize.Op.like]: param}
+            },
+            attributes: ['id', 'code', 'name', 'current_quantity', 'minimum_quantity', 'status']
+        });
+        return res.json(product);
+    },
+
+    async findAll(req, res){
+        const { code } = req.body;
+        console.log(code);
+        const product = await Product.findOne({
+            where: {
+                code: code
+            },
+            attributes: ['id', 'code', 'name', 'current_quantity', 'minimum_quantity', 'status']
         });
         return res.json(product);
     },

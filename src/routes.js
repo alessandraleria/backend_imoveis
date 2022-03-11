@@ -28,5 +28,6 @@ routes.post("/products/delete", Product.delete);
 routes.get("/properties", Properties.index);
 routes.post("/properties/findByUser", Properties.findByUserId);
 routes.post("/properties/findById", Properties.findById);
+routes.post("/properties/filter", Properties.filter);
 
 module.exports = routes;
