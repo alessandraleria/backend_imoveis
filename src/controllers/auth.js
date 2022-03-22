@@ -204,6 +204,7 @@ module.exports = {
 
     async checkUser(req, res, next){
         var token = req.headers['authorization'];
+        console.log(token)
         if (!token)
             return res.status(401).json({ auth: false, message: 'No token provided.' });
         if(typeof token !== 'undefined'){

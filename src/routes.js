@@ -12,7 +12,7 @@ const routes = express.Router();
 routes.post("/auth/login", Auth.login);
 routes.post("/auth/logout", Auth.logout);
 routes.post("/auth/google", Auth.googleLogin);
-routes.get("/user", Auth.checkUser);
+routes.get("/auth/user", Auth.checkUser);
 
 routes.get("/users", User.index);
 routes.post("/users/find", User.findByCpf);

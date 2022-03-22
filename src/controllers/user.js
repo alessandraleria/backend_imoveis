@@ -82,7 +82,6 @@ module.exports = {
 
     async findByCpf(req, res){
         const { cpf } = req.body;
-        console.log(req.body);
         const user = await User.findOne({
             where: {
                 cpf: cpf
